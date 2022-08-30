@@ -4,7 +4,7 @@
       <el-input
         v-model="listQuery.title"
         placeholder="请输入查询内容"
-        style="width: 200px;"
+        style="width: 200px"
         class="filter-item"
         @keyup.enter.native="handleFilter"
       />
@@ -60,7 +60,7 @@
       </el-button>
       <el-button
         class="filter-item"
-        style="margin-left: 10px;"
+        style="margin-left: 10px"
         type="primary"
         icon="el-icon-edit"
         @click="handleCreate"
@@ -80,7 +80,7 @@
       <el-checkbox
         v-model="showReviewer"
         class="filter-item"
-        style="margin-left:15px;"
+        style="margin-left: 15px"
         @change="tableKey = tableKey + 1"
       >
         reviewer
@@ -94,7 +94,7 @@
       border
       fit
       highlight-current-row
-      style="width: 100%;"
+      style="width: 100%"
       @sort-change="sortChange"
     >
       <el-table-column
@@ -122,12 +122,14 @@
       </el-table-column>
       <el-table-column label="用户密码" width="150px" align="center">
         <template slot-scope="{ row }">
-          <a href="#"><span>{{ row.userPwd }}</span></a>
+          <a href="#"
+            ><span>{{ row.userPwd }}</span></a
+          >
         </template>
       </el-table-column>
       <el-table-column label="购物车列表" width="300px" align="center">
         <template slot-scope="{ row }">
-           <span >{{ row.userName }}购物车</span>
+          <span>{{ row.userName }}购物车</span>
           <!-- <table >
             <tr>
               <th>产品ID:</th>
@@ -226,7 +228,7 @@
         :model="temp"
         label-position="left"
         label-width="70px"
-        style="width: 400px; margin-left:50px;"
+        style="width: 400px; margin-left: 50px"
       >
         <el-form-item label="用户ID:">
           <el-input v-model="temp.userId" />
@@ -239,9 +241,7 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">
-          取消
-        </el-button>
+        <el-button @click="dialogFormVisible = false"> 取消 </el-button>
         <el-button
           type="primary"
           @click="dialogStatus === 'create' ? createData() : updateData()"
@@ -272,42 +272,42 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 
-import waves from "@/directive/waves"; // waves directive
+import waves from '@/directive/waves' // waves directive
 // import { parseTime } from "@/utils";
-import Pagination from "@/components/Pagination"; // secondary package based on el-pagination
+import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
 const calendarTypeOptions = [
-  { key: "CN", display_name: "China" },
-  { key: "US", display_name: "USA" },
-  { key: "JP", display_name: "Japan" },
-  { key: "EU", display_name: "Eurozone" }
-];
+  { key: 'CN', display_name: 'China' },
+  { key: 'US', display_name: 'USA' },
+  { key: 'JP', display_name: 'Japan' },
+  { key: 'EU', display_name: 'Eurozone' },
+]
 
 // arr to obj, such as { CN : "China", US : "USA" }
 
 const calendarTypeKeyValue = calendarTypeOptions.reduce((acc, cur) => {
-  acc[cur.key] = cur.display_name;
-  return acc;
-}, {});
+  acc[cur.key] = cur.display_name
+  return acc
+}, {})
 
 export default {
-  name: "ComplexTable",
+  name: 'ComplexTable',
   components: { Pagination },
   directives: { waves },
   filters: {
     statusFilter(status) {
       const statusMap = {
-        published: "success",
-        draft: "info",
-        deleted: "danger"
-      };
-      return statusMap[status];
+        published: 'success',
+        draft: 'info',
+        deleted: 'danger',
+      }
+      return statusMap[status]
     },
     typeFilter(type) {
-      return calendarTypeKeyValue[type];
-    }
+      return calendarTypeKeyValue[type]
+    },
   },
   data() {
     return {
@@ -321,84 +321,84 @@ export default {
         importance: undefined,
         title: undefined,
         type: undefined,
-        sort: "+id"
+        sort: '+id',
       },
       importanceOptions: [1, 2, 3],
       calendarTypeOptions,
       sortOptions: [
-        { label: "ID Ascending", key: "+id" },
-        { label: "ID Descending", key: "-id" }
+        { label: 'ID Ascending', key: '+id' },
+        { label: 'ID Descending', key: '-id' },
       ],
-      statusOptions: ["published", "draft", "deleted"],
+      statusOptions: ['published', 'draft', 'deleted'],
       showReviewer: false,
       temp: {
-        userId: "",
-        userName: "",
-        userPwd: "",
-        orderList: "",
-        cartList:{
-            productId:"",
-            productName:"",
-            salePrice:"",
-            roductImage:"",
-            checked:"",
-            productNum:"",
+        userId: '',
+        userName: '',
+        userPwd: '',
+        orderList: '',
+        cartList: {
+          productId: '',
+          productName: '',
+          salePrice: '',
+          roductImage: '',
+          checked: '',
+          productNum: '',
         },
-        addressList:{
-          addressId:"",
-          userName:"",
-          streetName:"",
-          postCode:"",
-          tel:"",
-          isDefault:""
-        }
+        addressList: {
+          addressId: '',
+          userName: '',
+          streetName: '',
+          postCode: '',
+          tel: '',
+          isDefault: '',
+        },
       },
       dialogFormVisible: false,
-      dialogStatus: "",
+      dialogStatus: '',
       textMap: {
-        update: "Edit",
-        create: "Create"
+        update: 'Edit',
+        create: 'Create',
       },
       dialogPvVisible: false,
       pvData: [],
       rules: {
         type: [
-          { required: true, message: "type is required", trigger: "change" }
+          { required: true, message: 'type is required', trigger: 'change' },
         ],
         timestamp: [
           {
-            type: "date",
+            type: 'date',
             required: true,
-            message: "timestamp is required",
-            trigger: "change"
-          }
+            message: 'timestamp is required',
+            trigger: 'change',
+          },
         ],
         title: [
-          { required: true, message: "title is required", trigger: "blur" }
-        ]
+          { required: true, message: 'title is required', trigger: 'blur' },
+        ],
       },
-      downloadLoading: false
-    };
+      downloadLoading: false,
+    }
   },
   created() {
-    this.getList();
+    this.getList()
   },
   methods: {
     getList() {
-      this.listLoading = true;
+      this.listLoading = true
       axios
-        .get("http://localhost:3000/clientUser/list")
-        .then(res => {
-          console.log(res);
-          this.list = res.data.data.items;
-          this.total = res.data.data.total;
+        .get('http://localhost:3000/clientUser/list')
+        .then((res) => {
+          console.log(res)
+          this.list = res.data.data.items
+          this.total = res.data.data.total
           setTimeout(() => {
-            this.listLoading = false;
-          }, 1.5 * 1000);
+            this.listLoading = false
+          }, 1.5 * 1000)
         })
-        .catch(err => {
-          console.error(err);
-        });
+        .catch((err) => {
+          console.error(err)
+        })
       // fetchList(this.listQuery).then(response => {
       //   this.list = response.data.items
       //   this.total = response.data.total
@@ -410,68 +410,68 @@ export default {
       // })
     },
     handleFilter() {
-      this.listQuery.page = 1;
-      this.getList();
+      this.listQuery.page = 1
+      this.getList()
     },
     handleModifyStatus(row, status) {
       this.$message({
-        message: "操作Success",
-        type: "success"
-      });
-      row.status = status;
+        message: '操作Success',
+        type: 'success',
+      })
+      row.status = status
     },
     sortChange(data) {
-      const { prop, order } = data;
-      if (prop === "id") {
-        this.sortByID(order);
+      const { prop, order } = data
+      if (prop === 'id') {
+        this.sortByID(order)
       }
     },
     sortByID(order) {
-      if (order === "ascending") {
-        this.listQuery.sort = "+id";
+      if (order === 'ascending') {
+        this.listQuery.sort = '+id'
       } else {
-        this.listQuery.sort = "-id";
+        this.listQuery.sort = '-id'
       }
-      this.handleFilter();
+      this.handleFilter()
     },
     resetTemp() {
       this.temp = {
         id: undefined,
         importance: 1,
-        remark: "",
+        remark: '',
         timestamp: new Date(),
-        title: "",
-        status: "published",
-        type: ""
-      };
+        title: '',
+        status: 'published',
+        type: '',
+      }
     },
     handleCreate() {
-      this.resetTemp();
-      this.dialogStatus = "create";
-      this.dialogFormVisible = true;
+      this.resetTemp()
+      this.dialogStatus = 'create'
+      this.dialogFormVisible = true
       this.$nextTick(() => {
-        this.$refs["dataForm"].clearValidate();
-      });
+        this.$refs['dataForm'].clearValidate()
+      })
     },
     createData() {
-      this.$refs["dataForm"].validate(valid => {
+      this.$refs['dataForm'].validate((valid) => {
         if (valid) {
           axios
-            .post("http://localhost:3000/clientUser/addList", this.temp)
-            .then(res => {
-              this.list.unshift(this.temp);
-              this.dialogFormVisible = false;
+            .post('http://localhost:3000/clientUser/addList', this.temp)
+            .then((res) => {
+              this.list.unshift(this.temp)
+              this.dialogFormVisible = false
               this.$notify({
-                title: "Success",
-                message: "Created Successfully",
-                type: "success",
-                duration: 2000
-              });
-              console.log(res);
+                title: 'Success',
+                message: 'Created Successfully',
+                type: 'success',
+                duration: 2000,
+              })
+              console.log(res)
             })
-            .catch(err => {
-              console.error(err);
-            });
+            .catch((err) => {
+              console.error(err)
+            })
 
           // createArticle(this.temp).then(() => {
           //   this.list.unshift(this.temp);
@@ -484,42 +484,42 @@ export default {
           //   });
           // });
         }
-      });
+      })
     },
     handleUpdate(row) {
-      console.log();
-      
-      this.temp = Object.assign({}, row); // copy obj
-      this.temp.timestamp = new Date(this.temp.timestamp);
-      this.dialogStatus = "update";
-      this.dialogFormVisible = true;
+      console.log()
+
+      this.temp = Object.assign({}, row) // copy obj
+      this.temp.timestamp = new Date(this.temp.timestamp)
+      this.dialogStatus = 'update'
+      this.dialogFormVisible = true
       this.$nextTick(() => {
-        this.$refs["dataForm"].clearValidate();
-      });
+        this.$refs['dataForm'].clearValidate()
+      })
     },
     updateData() {
-     
-      this.$refs["dataForm"].validate(valid => {
+      this.$refs['dataForm'].validate((valid) => {
         if (valid) {
-          const tempData = Object.assign({}, this.temp);
-          console.log(tempData);
-           // change Thu Nov 30 2017 16:41:05 GMT+0800 (CST) to 1512031311464
-          axios.post("http://localhost:3000/clientUser/updateList",tempData)
-          .then(res => {
-            console.log(res)
-            const index = this.list.findIndex(v => v._id === this.temp._id);
-            this.list.splice(index, 1, this.temp);
-            this.dialogFormVisible = false;
-            this.$notify({
-              title: "Success",
-              message: "Update Successfully",
-              type: "success",
-              duration: 2000
-            });
-          })
-          .catch(err => {
-            console.error(err); 
-          })
+          const tempData = Object.assign({}, this.temp)
+          console.log(tempData)
+          // change Thu Nov 30 2017 16:41:05 GMT+0800 (CST) to 1512031311464
+          axios
+            .post('http://localhost:3000/clientUser/updateList', tempData)
+            .then((res) => {
+              console.log(res)
+              const index = this.list.findIndex((v) => v._id === this.temp._id)
+              this.list.splice(index, 1, this.temp)
+              this.dialogFormVisible = false
+              this.$notify({
+                title: 'Success',
+                message: 'Update Successfully',
+                type: 'success',
+                duration: 2000,
+              })
+            })
+            .catch((err) => {
+              console.error(err)
+            })
           // updateArticle(tempData).then(() => {
           //   const index = this.list.findIndex(v => v._id === this.temp._id);
           //   this.list.splice(index, 1, this.temp);
@@ -532,24 +532,24 @@ export default {
           //   });
           // });
         }
-      });
+      })
     },
     handleDelete(row, index) {
       axios
-        .post("http://localhost:3000/clientUser/deleteList", row)
-        .then(res => {
+        .post('http://localhost:3000/clientUser/deleteList', row)
+        .then((res) => {
           this.$notify({
-            title: "Success",
-            message: "Delete Successfully",
-            type: "success",
-            duration: 2000
-          });
-          this.list.splice(index, 1);
-          console.log(res);
+            title: 'Success',
+            message: 'Delete Successfully',
+            type: 'success',
+            duration: 2000,
+          })
+          this.list.splice(index, 1)
+          console.log(res)
         })
-        .catch(err => {
-          console.error(err);
-        });
+        .catch((err) => {
+          console.error(err)
+        })
     },
     handleFetchPv(pv) {
       // fetchPv(pv).then(response => {
@@ -558,53 +558,46 @@ export default {
       // });
     },
     handleDownload() {
-      this.downloadLoading = true;
-      import("@/vendor/Export2Excel").then(excel => {
-        const tHeader = [
-          "用户ID",
-          "用户名称",
-          "用户密码",
-        ];
-        const filterVal = [
-          "userId",
-          "userName",
-          "userPwd",
-        ];
-        const data = this.formatJson(filterVal);
+      this.downloadLoading = true
+      import('@/vendor/Export2Excel').then((excel) => {
+        const tHeader = ['用户ID', '用户名称', '用户密码']
+        const filterVal = ['userId', 'userName', 'userPwd']
+        const data = this.formatJson(filterVal)
         excel.export_json_to_excel({
           header: tHeader,
           data,
-          filename: "用户列表"
-        });
-        this.downloadLoading = false;
-      });
+          filename: '用户列表',
+        })
+        this.downloadLoading = false
+      })
     },
     formatJson(filterVal) {
-      return this.list.map(v =>
-        filterVal.map(j => {
+      return this.list.map((v) =>
+        filterVal.map((j) => {
           // if (j === "productId") {
           //   return parseTime(v[j]);
           // } else {
-            return v[j];
+          return v[j]
           // }
         })
-      );
+      )
     },
-    getSortClass: function(key) {
-      const sort = this.listQuery.sort;
-      return sort === `+${key}` ? "ascending" : "descending";
-    }
-  }
-};
+    getSortClass: function (key) {
+      const sort = this.listQuery.sort
+      return sort === `+${key}` ? 'ascending' : 'descending'
+    },
+  },
+}
 </script>
-<style  scoped>
-ul{
+<style scoped>
+ul {
   list-style: none;
 }
-table{
+table {
   width: 100%;
-} 
-th,td{
+}
+th,
+td {
   text-align: center;
 }
 </style>
